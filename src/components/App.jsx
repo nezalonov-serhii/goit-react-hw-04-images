@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Button } from './Button/ButtonLoad';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { InfoPlaceholder } from './InfoSearch/InfoSearch';
+import { InfoSearch } from './InfoSearch/InfoSearch';
 import { Loader } from './Loader/Loader';
 import { Searchbar } from './Searchbar/Searchbar';
 
@@ -16,7 +16,6 @@ export function App() {
 
   const [toggleLoader, setToggleLoader] = useState(false);
   const [toggleButton, setToggleButton] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!searchName) return;
@@ -58,16 +57,14 @@ export function App() {
       setDataImages([]);
       setPage(1);
       setToggleButton(false);
-      setError('');
     }
   }
 
   return (
     <>
       <Searchbar onSubmit={onSubmitSearch} />
-      {!searchName && <InfoPlaceholder searchName={searchName} error={error} />}
-
-      {searchName && <ImageGallery dataImages={dataImages} />}
+      {dataImages.length === 0 && <InfoSearch searchName={searchName} />}
+      {dataImages.length !== 0 && <ImageGallery dataImages={dataImages} />}
       {toggleButton && (
         <Button clickLoadMore={clickLoadMore} toggleLoader={toggleLoader} />
       )}
