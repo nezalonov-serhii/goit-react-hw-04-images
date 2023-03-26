@@ -1,6 +1,6 @@
 import { WrapPlaceholder } from './InfoSearch.styled';
 
-export function InfoSearch({ searchName }) {
+export function InfoSearch() {
   return (
     <>
       <WrapPlaceholder>

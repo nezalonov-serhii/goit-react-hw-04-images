@@ -63,7 +63,7 @@ export function App() {
   return (
     <>
       <Searchbar onSubmit={onSubmitSearch} />
-      {dataImages.length === 0 && <InfoSearch searchName={searchName} />}
+      {dataImages.length === 0 && <InfoSearch />}
       {dataImages.length !== 0 && <ImageGallery dataImages={dataImages} />}
       {toggleButton && (
         <Button clickLoadMore={clickLoadMore} toggleLoader={toggleLoader} />
