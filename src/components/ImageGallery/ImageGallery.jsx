@@ -1,14 +1,11 @@
-import { Button } from 'components/Button/ButtonLoad';
-import { Loader } from 'components/Loader/Loader';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { Modal } from 'components/Modal/Modal';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
-
 import { GalleryList, WrapGallary } from './ImageGallery.styled';
-import { useState } from 'react';
 
-export function ImageGallery(props) {
-  const { dataImages, page, clickLoadMore, toggleLoader, toggleButton } = props;
-
+export function ImageGallery({ dataImages }) {
   const [toggleModal, setToggleModal] = useState(false);
   const [largeImageUrl, setLargeImageUrl] = useState('');
   const [largeImageAlt, setLargeImageAlt] = useState('');
@@ -20,24 +17,18 @@ export function ImageGallery(props) {
   }
 
   function closeModal() {
+    setToggleModal(false);
     setLargeImageUrl('');
     setLargeImageAlt('');
-    setToggleModal(false);
   }
 
   return (
     <>
-      {toggleLoader && page === 1 && (
-        <Loader widthLoader={'200'} heightLoader={'200'} />
-      )}
-      {dataImages.length && (
+      {dataImages.length !== 0 && (
         <WrapGallary>
           <GalleryList>
             <ImageGalleryItem images={dataImages} modalOpen={modalOpen} />
           </GalleryList>
-          {toggleButton && (
-            <Button clickLoadMore={clickLoadMore} toggleLoader={toggleLoader} />
-          )}
 
           {toggleModal && (
             <Modal
@@ -51,3 +42,7 @@ export function ImageGallery(props) {
     </>
   );
 }
+
+ImageGallery.propTypes = {
+  dataImages: PropTypes.array.isRequired,
+};

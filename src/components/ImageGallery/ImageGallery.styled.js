@@ -6,7 +6,6 @@ export const GalleryList = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 16px;
   margin-top: 0;
-  margin-bottom: 30px;
   padding: 0;
   list-style: none;
   margin-left: auto;
@@ -14,5 +13,5 @@ export const GalleryList = styled.ul`
 `;
 
 export const WrapGallary = styled.div`
-  padding: 20px 0 40px 0;
+  padding: 20px 0 20px 0;
 `;

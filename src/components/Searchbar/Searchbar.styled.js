@@ -30,11 +30,12 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://img.icons8.com/ios-filled/256/search--v1.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -47,16 +48,9 @@ export const Button = styled.button`
     opacity: 1;
   }
 
-  & span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    clip-path: inset(50%);
-    border: 0;
+  & svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 

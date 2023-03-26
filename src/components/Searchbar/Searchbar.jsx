@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { ImSearch } from 'react-icons/im';
 
 import { Button, Form, Input, SearchbarHeader } from './Searchbar.styled';
 
@@ -21,7 +22,7 @@ export function Searchbar({ onSubmit }) {
     <SearchbarHeader>
       <Form onSubmit={handlerSubmit}>
         <Button type="submit">
-          <span className="button-label">Search</span>
+          <ImSearch />
         </Button>
 
         <Input

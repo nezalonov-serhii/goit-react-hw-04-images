@@ -4,7 +4,7 @@ export const ButtonLoad = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0 auto 40px;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;

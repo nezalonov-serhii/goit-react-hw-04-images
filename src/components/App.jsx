@@ -1,7 +1,12 @@
 import { fetchImages } from 'api/fetch-api-gallery';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import { Button } from './Button/ButtonLoad';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { InfoPlaceholder } from './InfoSearch/InfoSearch';
+import { Loader } from './Loader/Loader';
 import { Searchbar } from './Searchbar/Searchbar';
 
 export function App() {
@@ -10,7 +15,8 @@ export function App() {
   const [page, setPage] = useState(1);
 
   const [toggleLoader, setToggleLoader] = useState(false);
-  const [toggleButton, setToggleButton] = useState(true);
+  const [toggleButton, setToggleButton] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!searchName) return;
@@ -25,13 +31,13 @@ export function App() {
             setToggleButton(true);
           }
 
-          console.log('123');
-
           setDataImages(prevImages => {
             return [...prevImages, ...images.hits];
           });
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          toast.info(error.message);
+        })
         .finally(() => {
           setToggleLoader(false);
         });
@@ -51,21 +57,30 @@ export function App() {
       setSearchName(searchName);
       setDataImages([]);
       setPage(1);
+      setToggleButton(false);
+      setError('');
     }
   }
 
   return (
     <>
       <Searchbar onSubmit={onSubmitSearch} />
-      {searchName && (
-        <ImageGallery
-          clickLoadMore={clickLoadMore}
-          dataImages={dataImages}
-          page={page}
-          toggleLoader={toggleLoader}
-          toggleButton={toggleButton}
-        />
+      {!searchName && <InfoPlaceholder searchName={searchName} error={error} />}
+
+      {searchName && <ImageGallery dataImages={dataImages} />}
+      {toggleButton && (
+        <Button clickLoadMore={clickLoadMore} toggleLoader={toggleLoader} />
       )}
+      {toggleLoader && page === 1 && (
+        <Loader widthLoader={'200'} heightLoader={'200'} />
+      )}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover
+      />
     </>
   );
 }

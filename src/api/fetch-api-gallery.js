@@ -15,5 +15,11 @@ export async function fetchImages(searchName, page) {
     },
   });
 
-  return fetchImage.data;
+  if (fetchImage.status !== 200) {
+    throw new Error(`Something went wrong try again`);
+  } else if (fetchImage.status === 200 && fetchImage.data.hits.length === 0) {
+    throw new Error(`We didn't find any photos`);
+  } else if (fetchImage.status === 200) {
+    return fetchImage.data;
+  }
 }
