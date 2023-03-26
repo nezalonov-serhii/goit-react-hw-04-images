@@ -51,13 +51,12 @@ export function App() {
     });
   }
 
-  function onSubmitSearch(searchName) {
-    if (searchName !== '') {
-      setSearchName(searchName);
-      setDataImages([]);
-      setPage(1);
-      setToggleButton(false);
-    }
+  function onSubmitSearch(searchText) {
+    if (searchText === searchName) return;
+    setSearchName(searchText);
+    setDataImages([]);
+    setPage(1);
+    setToggleButton(false);
   }
 
   return (

@@ -14,6 +14,7 @@ export function Searchbar({ onSubmit }) {
   function handlerSubmit(e) {
     e.preventDefault();
 
+    console.log(searchValue);
     onSubmit(searchValue.trim());
     setSearchValue('');
   }
